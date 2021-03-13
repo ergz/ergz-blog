@@ -143,17 +143,19 @@ header {
 header .main {
   font-size: 1.5rem;
 }
-h1, h2, h3, h4, h5, h6 {
+
+/*h1, h2, h3, h4, h5, h6 {
   font-size: 1.2rem;
   margin-top: 2em;
-}
+}*/
 
-h1::before { color: var(--maincolor); content: '# '; }
+/*h1::before { color: var(--maincolor); content: '# '; }
 h2::before { color: var(--maincolor); content: '## '; }
 h3::before { color: var(--maincolor); content: '### '; }
 h4::before { color: var(--maincolor); content: '#### '; }
 h5::before { color: var(--maincolor); content: '##### '; }
 h6::before { color: var(--maincolor); content: '###### '; }
+*/
 
 /* Footer */
 footer {
@@ -288,6 +290,11 @@ color: royalblue ;
 .highlight pre code[class*='language-md']::before,
 .highlight pre code[class*='language-md']::before{
 content: 'Markdown';
+background: royalblue;
+color: whitesmoke ;
+}
+.highlight pre code[class*='language-r']::before{
+content: 'R';
 background: royalblue;
 color: whitesmoke ;
 }
