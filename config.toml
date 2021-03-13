@@ -1,4 +1,4 @@
-baseURL = "http://emnlrgz.com/"
+baseURL = "/"
 languageCode = "en-us"
 title = "Emanuel's Site"
 theme = "archie"
