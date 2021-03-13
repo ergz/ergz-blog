@@ -8,13 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Fri, 12 Mar 2021 22:53:42 -0800</lastBuildDate><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Welcome</title>
-      <link>/posts/hello/</link>
+      <title>Welcome and Plan</title>
+      <link>/posts/welcome/</link>
       <pubDate>Fri, 12 Mar 2021 22:53:42 -0800</pubDate>
       
-      <guid>/posts/hello/</guid>
-      <description>h2 h3 h4 h5 this is the first post on this site.
-def main(): pass x &amp;lt;- c(1, 2, 3, 4) </description>
+      <guid>/posts/welcome/</guid>
+      <description>The plan for this site is to have an archive of my work, ideas and research. It is my intention to write good articles about my work and potentially upload some stuff about hobbies.</description>
     </item>
     
   </channel>
