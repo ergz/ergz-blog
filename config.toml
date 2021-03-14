@@ -1,7 +1,6 @@
 baseURL = "/"
 languageCode = "en-us"
 title = "Emanuel's Site"
-description = " "
 theme = "archie"
 pygmentsstyle = "monokai"
 pygmentscodefences = true
@@ -10,6 +9,7 @@ pygmentscodefencesguesssyntax = true
 [params]
     mode = "light"
     useCDN = false
+    subtitle = "A place for me to archive and share notes, research, and hobbies"
 
 [[params.social]]
     name = "GitHub"
@@ -22,7 +22,7 @@ pygmentscodefencesguesssyntax = true
     weight = 1
 
 [[menu.main]]
-    name = "All posts"
+    name = "Posts"
     url = "/posts"
     weight = 2
 
@@ -30,8 +30,3 @@ pygmentscodefencesguesssyntax = true
     name = "About"
     url = "/about"
     weight = 3
-
-[[menu.main]]
-    name = "Tags"
-    url = "/tags"
-    weight = 4
