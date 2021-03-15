@@ -112,7 +112,7 @@ pre {
 }
 
 .highlight pre ::selection {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(106, 189, 212, 0.2);
   color: inherit;
 }
 
@@ -296,6 +296,11 @@ color: whitesmoke ;
 }
 .highlight pre code[class*='language-r']::before{
 content: 'R';
+background: royalblue;
+color: whitesmoke ;
+}
+.highlight pre code[class*='language-c']::before{
+content: 'C';
 background: royalblue;
 color: whitesmoke ;
 }

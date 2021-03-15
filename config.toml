@@ -2,7 +2,7 @@ baseURL = "/"
 languageCode = "en-us"
 title = "Emanuel's Site"
 theme = "archie"
-pygmentsstyle = "vim"
+pygmentsstyle = "algol_nu"
 pygmentscodefences = true
 pygmentscodefencesguesssyntax = true
 
