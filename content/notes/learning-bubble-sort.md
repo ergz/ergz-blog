@@ -1,5 +1,8 @@
 ---
 title: Bubble Sort Notes
+tags:
+    - learning
+    - algos
 ---
 
 Part of collection of notes as I read through an Algo and DS book [[notes/learning-quicksort]]

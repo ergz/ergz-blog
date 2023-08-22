@@ -1,5 +1,8 @@
 ---
 title: Quicksort Notes
+tags:
+    - learning
+    - algos
 ---
 
 quicksort is a sorting that uses a partitioning scheme along with recursion to sort an array.
