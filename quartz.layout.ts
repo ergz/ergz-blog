@@ -8,7 +8,7 @@ export const sharedPageComponents: SharedLayout = {
   header: [],
   footer: Component.Footer({
     links: {
-      GitHub: "https://github.com/jackyzha0/quartz",
+      GitHub: "https://github.com/ergz",
       "Discord Community": "https://discord.gg/cRFFHYye7t",
     },
   }),
@@ -25,17 +25,22 @@ export const defaultContentPageLayout: PageLayout = {
     Component.DesktopOnly(Component.TableOfContents()),
     Component.DesktopOnly(
       Component.RecentNotes({
-        title: "Recent Posts",
-        limit: 2,
-        filter: (f) => f.slug!.startsWith("posts/"),
+        title: "Recent Writing",
+        limit: 4,
+        filter: (f) =>
+          f.slug!.startsWith("posts/") && f.slug! !== "posts/index.md" && !f.frontmatter?.noindex,
+        sort: (f1, f2) =>
+          (f2.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER) -
+          (f1.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER),
         linkToMore: "posts/" as SimpleSlug,
       }),
     ),
     Component.DesktopOnly(
       Component.RecentNotes({
         title: "Recent Notes",
-        limit: 2,
-        filter: (f) => f.slug!.startsWith("notes/"),
+        limit: 4,
+        filter: (f) =>
+          f.slug!.startsWith("notes/") && f.slug! !== "notes/index.md" && !f.frontmatter?.noindex,
         linkToMore: "notes/" as SimpleSlug,
       }),
     )
