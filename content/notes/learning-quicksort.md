@@ -47,8 +47,8 @@ The quicksort will use this and just recursively call partition on smaller and s
 void quicksort(int arr[], int lo, int hi) {
 	if (lo < hi) {
 		partition_index = partition(arr, lo, hi);
-		partition(arr, lo, partition_index - 1);
-		partition(arr, partition_index + 1, hi);
+		quicksort(arr, lo, partition_index - 1);
+		quicksort(arr, partition_index + 1, hi);
 	}
 }
 ```
