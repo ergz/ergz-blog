@@ -41,6 +41,9 @@ export const defaultContentPageLayout: PageLayout = {
         limit: 4,
         filter: (f) =>
           f.slug!.startsWith("notes/") && f.slug! !== "notes/index.md" && !f.frontmatter?.noindex,
+        sort: (f1, f2) =>
+          (f2.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER) -
+          (f1.dates?.created.getTime() ?? Number.MAX_SAFE_INTEGER),
         linkToMore: "notes/" as SimpleSlug,
       }),
     )
