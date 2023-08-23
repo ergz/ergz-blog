@@ -1,5 +1,6 @@
 ---
 title: Random Note 8/22/23
+date: 2023-08-22
 draft: false
 tags:
     - thoughts

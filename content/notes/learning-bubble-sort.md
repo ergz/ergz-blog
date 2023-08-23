@@ -1,6 +1,6 @@
 ---
 title: Bubble Sort Notes
-date: 2020-12-30T13:43:34-08:00
+date: 2023-07-01
 tags:
     - learning
     - algos

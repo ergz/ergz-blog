@@ -1,5 +1,6 @@
 ---
 title: Quicksort Notes
+date: 2023-05-01
 tags:
     - learning
     - algos
