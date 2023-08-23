@@ -3,13 +3,13 @@ import * as Plugin from "./quartz/plugins"
 
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "🏜️Emanuel's Site",
+    pageTitle: "🎲 Emanuel's Site",
     enableSPA: true,
     enablePopovers: true,
     analytics: {
       provider: "plausible",
     },
-    baseUrl: "quartz.jzhao.xyz",
+    baseUrl: "emanuelrgz.com",
     ignorePatterns: ["private", "templates"],
     theme: {
       typography: {
