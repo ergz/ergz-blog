@@ -95,3 +95,98 @@ def delete_at_key(key, container):
     key_hash = hash(key)
     container[key_hash] = None
 ```
+
+Lets try implementing this in C
+
+First lets just translate the hash funcion.
+
+```c
+#include <string.h>
+
+int get_index_for_letter(char letter) {
+    if (letter >= 'a' && letter <= 'z') {
+        return (letter - 'a') + 1;
+    } else {
+        return -1;
+    }
+}
+
+int hash(char *word) {
+    int word_len = strlen(word);
+    int accum = 1;
+    int index;
+    for (int i = 0; i < word_len; i++) {
+        index = get_index_for_letter(word[i]);
+        accum *= index;
+    }
+
+    return accum % 16;
+}
+```
+
+``` 
+> hash-table.exe
+the hash value of the word is 0
+```
+
+So far so good, there are many parts of the C code that can be improved, but I will 
+tackle that later on in a different section.
+
+The insert part for now will be very basic
+
+```c
+int main() {
+    char word[] = "hello";
+    int  hash_val = hash(word);
+
+    printf("the hash value of the word is %d\n", hash_val);
+
+    char *hash_table[16];
+    for (int i = 0; i < 16; i++) {
+        hash_table[i] = NULL;
+    }
+
+    hash_table[hash_val] = "world";
+
+    return 0;
+}
+
+```
+
+We can also add `get` function to retrieve a value given a key
+
+```c
+char *get_key(char *hash_table[], char *key) {
+    int hash_val = hash(key);
+    return hash_table[hash_val];
+}
+```
+
+main now looks like:
+
+```c
+int main() {
+    char word[] = "hello";
+    int  hash_val = hash(word);
+
+    printf("the hash value of the word is %d\n", hash_val);
+
+    char *hash_table[16];
+    for (int i = 0; i < 16; i++) {
+        hash_table[i] = NULL;
+    }
+
+    hash_table[hash_val] = "world";
+    char *value = get_key(hash_table, word);
+
+    printf("the value at key '%s' is '%s'", word, value);
+
+    return 0;
+}
+```
+
+```
+> hash-table.exe
+the hash value of the word is 0
+the value at key 'hello' is 'world'
+```

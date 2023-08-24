@@ -1,6 +1,7 @@
 ---
 title: Learning Array Lists
 date: 2023-08-22
+draft: true
 tags:
     - learning
     - algosAndDS
