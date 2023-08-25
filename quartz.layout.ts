@@ -29,9 +29,9 @@ export const defaultContentPageLayout: PageLayout = {
         limit: 4,
         filter: (f) =>
           f.slug!.startsWith("posts/") && f.slug! !== "posts/index.md" && !f.frontmatter?.noindex,
-        sort: (f1, f2) =>
-          (f2.dates?.modified.getTime() ?? Number.MAX_SAFE_INTEGER) -
-          (f1.dates?.modified.getTime() ?? Number.MAX_SAFE_INTEGER),
+        // sort: (f1, f2) =>
+        //   (f2.dates?.published.getTime() ?? Number.MAX_SAFE_INTEGER) -
+        //   (f1.dates?.published.getTime() ?? Number.MAX_SAFE_INTEGER),
         linkToMore: "posts/" as SimpleSlug,
       }),
     ),
@@ -41,9 +41,9 @@ export const defaultContentPageLayout: PageLayout = {
         limit: 4,
         filter: (f) =>
           f.slug!.startsWith("notes/") && f.slug! !== "notes/index.md" && !f.frontmatter?.noindex,
-        sort: (f1, f2) =>
-          (f2.dates?.modified.getTime() ?? Number.MAX_SAFE_INTEGER) -
-          (f1.dates?.modified.getTime() ?? Number.MAX_SAFE_INTEGER),
+        // sort: (f1, f2) =>
+        //   (f2.dates?.published.getTime() ?? Number.MAX_SAFE_INTEGER) -
+        //   (f1.dates?.published.getTime() ?? Number.MAX_SAFE_INTEGER),
         linkToMore: "notes/" as SimpleSlug,
       }),
     )
