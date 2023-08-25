@@ -190,3 +190,58 @@ int main() {
 the hash value of the word is 0
 the value at key 'hello' is 'world'
 ```
+
+Lets add a bit more structure to the hash table, by creating a struct to store the hash table strucutre.
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct HashTable {
+    char *data[16];
+} HashTable;
+
+HashTable *new_hashtable() {
+    HashTable *ht = malloc(sizeof(HashTable));
+    for (int i = 0; i < 16; i++) {
+        ht->data[i] = NULL;
+    }
+
+    return (ht);
+}
+
+```
+
+and some new function as well as the updated main.
+
+
+```c
+
+char *get(HashTable *h, char *key) {
+    int hash_val = hash(key);
+    return h->data[hash_val];
+}
+
+void insert(HashTable *h, char *key, char *value) {
+    int hashed_key = hash(key);
+    h->data[hashed_key] = value;
+}
+
+void delete(HashTable *h, char *key) {
+    int hashed_key = hash(key);
+    h->data[hashed_key] = NULL;
+}
+
+int main() {
+    HashTable *hash_table = new_hashtable();
+    char      *key = "hello";
+    insert(hash_table, key, "world");
+    char *res = get(hash_table, "hello");
+
+    printf("the value at key '%s' is '%s'", key, res);
+
+    return 0;
+}
+
+```
