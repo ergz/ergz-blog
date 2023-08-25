@@ -11,6 +11,7 @@ const config: QuartzConfig = {
     },
     baseUrl: "emanuelrgz.com",
     ignorePatterns: ["private", "templates"],
+    defaultDateType: "created",
     theme: {
       typography: {
         header: "Schibsted Grotesk",
