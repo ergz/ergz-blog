@@ -245,3 +245,93 @@ int main() {
 }
 
 ```
+
+Now we try and deal with collisions. So what are colissions? Colissions are simply when a 
+key gets hashe to the same index that another key was hashed to. For example hashing "bad", and
+"dab" with my hash would be a collision. One of the way that these are resolved is by creating 
+a sub array within the hash table to store more than one value per hash.
+
+One way to resolve this:
+
+```c
+void insert(HashTable *h, char *key, char *value) {
+    int hashed_key = hash(key);
+
+    if (h->data[hashed_key] != NULL) {
+        fprintf(stderr, "ERROR: collision!");
+        exit(1);
+    }
+
+    h->data[hashed_key] = value;
+}
+
+```
+
+LOL but that is bad.
+
+## Improve the hash table
+
+So far I have only been storing the values, lets storing the key and values together.
+
+
+```c
+#define MAX_HASH_TABLE_SIZE 16
+
+typedef struct KV {
+    char *key;
+    char *value;
+} KV;
+
+typedef struct HashTable {
+    KV data[MAX_HASH_TABLE_SIZE];
+} HashTable;
+
+HashTable *new_hashtable() {
+    HashTable *ht = malloc(sizeof(HashTable));
+    for (int i = 0; i < MAX_HASH_TABLE_SIZE; i++) {
+        ht->data[i].key = NULL;
+        ht->data[i].value = NULL;
+    }
+
+    return (ht);
+}
+
+```
+
+I will continue using this simple hashing function for now.
+
+I need find a way to determine if a key is in the hash table I will implement 
+a linear search for this. Here a very basic linear search that uses `strcmp` 
+to check if the a key exist in the hash table.
+
+
+```c
+KV *find_KV_in_ht(HashTable h, char *key) {
+    for (size_t i = 0; i < MAX_HASH_TABLE_SIZE; i++) {
+        if ((h.data[i].key != NULL) && (strcmp(h.data[i].key, key) == 0)) {
+            return (&h.data[i]);
+        }
+    }
+
+    return (NULL);
+}
+```
+
+and here is a very basic main to test it out
+
+```c
+int main() {
+
+    HashTable *h = new_hashtable();
+
+    // test leaving 0 index NULL
+    h->data[1].key = "hello";
+    h->data[1].value = "world";
+
+    KV *kv = find_KV_in_ht(*h, "hello");
+    printf("the value corresponding to the key 'hello' is: %s", kv->value);
+
+    return 0;
+}
+
+```
