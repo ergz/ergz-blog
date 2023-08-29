@@ -335,3 +335,216 @@ int main() {
 }
 
 ```
+
+### Functions to add, remove and retrieve
+
+The first one we can tackle is the retrieve one, since we already developed
+the linear search, we can just use that here:
+
+```c
+char *get_value(HashTable ht, char *key) {
+    KV *kv = find_KV_in_ht(ht, key);
+
+    return kv->value;
+}
+```
+
+This essentially a wrapper to find_kv but it returns the `char*` of the value itself.
+
+Here is the insert:
+
+```c
+void insert_kv(HashTable *ht, char *key, char *value) {
+    KV *kv = find_KV_in_ht(*ht, key);
+
+    if (kv == NULL) {
+        int hash_val = hash(key);
+        if (ht->data[hash_val].key != NULL) {  // value with has exists
+            // come up with clever way to resolve the collision
+        } else {
+            ht->data[hash_val].key = key;
+            ht->data[hash_val].value = value;
+        }
+    } else {
+        printf("key already in HashTable\n");
+    }
+}
+
+```
+
+Ok lets think of ways to resolve this collision, the book I am reading for this suggets a naive
+solution which is when this happens have this index point a "sub-array" with key value pairs
+for this hash. The book relies heavily on scripting languages, so I gotta think a bit of how
+to best do this in C.
+
+So in order to this new approach I need rewrite the way I am doing the hashtable structure, the
+structures now look like this:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_HASH_TABLE_SIZE 16
+
+typedef struct KV {
+    char *key;
+    char *value;
+} KV;
+
+typedef struct Node {
+    KV           kv;
+    struct Node *next;
+} Node;
+
+typedef struct HashTable {
+    Node *data[MAX_HASH_TABLE_SIZE];
+} HashTable;
+
+HashTable *new_hashtable() {
+    HashTable *ht = malloc(sizeof(HashTable));
+    for (int i = 0; i < MAX_HASH_TABLE_SIZE; i++) {
+        ht->data[i] = NULL;
+    }
+
+    return (ht);
+}
+```
+
+Basically what's going to happen is, at the very basic usage each element of
+data in the hastable will just have a single Node with a KV, however in the
+case of a collision the first node will point to second node that stores
+the other kv that got mapped to this same hash. The `node --> node` approach 
+is a linked list.
+
+We need to update the other functions, here is the updated version of the `insert`.
+
+```c
+void insert_kv(HashTable *ht, char *key, char *value) {
+    int hashed_key = hash(key);
+
+    Node *current = ht->data[hashed_key];
+
+    while (current) {
+        if (strcmp(current->kv.key, key) == 0) {
+            current->kv.value = value;
+            return;
+        }
+
+        current = current->next;
+    }
+
+    Node *new = new_node();
+    new->kv.key = key;
+    new->kv.value = value;
+    new->next = current;
+    ht->data[hashed_key] = new;
+}
+```
+
+what we do here is get the current value at the hashed key, this can be `NULL`
+and will be the case when we are inserting at this hash for the first time. Wen this 
+is not null we step into the while loop iterating through all values in the linked list
+starting the current node. If we find the same key we are trying to insert we update, otherwise
+the key is new. At this point we create a new node that we will preppend to the link list. 
+If this is the first item in the hash then it will be the first (and only) node at the 
+hash index. 
+
+The updated `get` function is here, I do it in two functions, since I will need the `get_node` 
+function for some other operations as well.
+
+```c
+Node *get_node(HashTable ht, char *key) {
+    int hash_key = hash(key);
+
+    Node *node_at_hash = ht.data[hash_key];
+
+    if (node_at_hash == NULL) {
+        fprintf(stderr, "ERROR: key not found in hashtable");
+        return (NULL);
+    }
+
+    while (node_at_hash) {
+        if (strcmp(node_at_hash->kv.key, key) == 0) {
+            return (node_at_hash);
+        }
+
+        node_at_hash = node_at_hash->next;
+    }
+
+    return (NULL);
+}
+
+char *get_value(HashTable ht, char *key) {
+    Node *node = get_node(ht, key);
+
+    if (node) {
+        return (node->kv.value);
+
+    } else {
+        return (NULL);
+    }
+}
+```
+
+Updated `delete`. For the delete I need to be more careful since simply removing a node
+can potentially leave `next` nodes dangling with no link back to the hashtable. In order to 
+make this work I will update the `Node` struct to point to the previous node as well (doubly-linked list(?)).
+
+```c
+typedef struct Node {
+    KV           kv;
+    struct Node *next;
+    struct Node *prev;  // to make deleteing a key easier
+} Node;
+```
+
+and `delete_key`
+
+```c {8}
+void delete_key(HashTable *ht, char *key) {
+    Node *node = get_node(*ht, key);
+
+    if (node->prev) {                   // if node is not first
+        node->prev->next = node->next;  // skip over node to delete
+        free(node);
+    } else {  // if node is first
+        ht->data[hash(key)] = node->next;
+        free(node);
+    }
+
+    return;
+}
+```
+
+what I do here is first check if the node is the first in the linked list, if it is, 
+then I just assign the `data` value of the hashtable to be the `next` of the node to 
+delete, this may be `NULL` but that is fine. If the node to remove is not the first I simply
+skip over it by pointing around it, in both cases I `free` the node. Line 8 (highlighted)
+seems like its doing duplicate work, since I am already getting the hash of the key in the
+`get_node` function, but I wont worry about this for now.
+
+Here is my main function for testing so far.
+
+```c
+int main() {
+    HashTable *h = new_hashtable();
+
+    insert_kv(h, "hello", "there");
+    char *key = "hello";
+    char *result = get_value(*h, key);
+    printf("the value corresponding to the key 'hello' is: '%s'\n", result);
+    delete_key(h, key);
+    char *new_result = get_value(*h, key);
+    printf("the value corresponding to the key 'hello' is: '%s'\n", new_result);
+
+    return 0;
+}
+```
+
+```
+> hash-table.exe 
+the value corresponding to the key 'hello' is: 'there'
+ERROR: key not found in hashtable
+the value corresponding to the key 'hello' is: '(null)'
+```
