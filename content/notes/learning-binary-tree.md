@@ -312,3 +312,117 @@ int main(void) {
 [ 25 20 17 15 7 10 4  ]
 [ 15 20 25 17 10 7 4  ]
 ```
+
+> [!info] TODO
+>
+> write the section for breadth first search
+
+## Searching 
+
+We can easily modify one of the above to return true/false for finding a value, 
+but given that we are working with a binary tree, we have some properties in place
+that will make the search very easy. 
+
+The basic algorithm for searching on a binary search tree is:
+
+1. start at the root node, call it `current_node`
+2. does `current_node == value` where `value` is the value we are searching for?
+3. If yes, then return true
+4. Otherwise, check: is `value < current_node.value`?, if yes repeat 1 to 3 by setting `current_node` to the left node of `current_node` and repeat 1-3
+5. If `value > current_node.value` then set `current_node` to the right node of `current_node`, and repeat 1-3
+6. If we reach a node with no children then we can conclude that `value` is not in the tree.
+
+Lets implement it first in python, then we'll tackle it in C.
+
+**Python**
+
+```python
+def bt_search(node, value):
+    if value == node.value:
+        return True
+
+    if node.left is None and node.right is None:
+        return False
+
+    if value > node.value:
+        return bt_search(node=node.right, value=value)
+    else:
+        return bt_search(node=node.left, value=value)
+
+```
+
+```
+>>> bt_search(tree, 25)
+True
+>>> bt_search(tree, 4)
+True
+>>> bt_search(tree, 26)
+False
+```
+
+**C**
+
+C as always is a bit more raw but in this case it pretty much looks the same:
+
+```c
+bool BT_search(IntBTNode *node, int value) {
+    if (node == NULL) {
+        return false;
+    }
+
+    if (node->value == value) {
+        return (true);
+    }
+
+    if (value >= node->value) {
+        return (BT_search(node->right, value));
+    } else {
+        return (BT_search(node->left, value));
+    }
+}
+```
+
+Here is an updated version of my main function 
+
+```c
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+    IntBTNode *root_node = new_BT_node(15);
+    root_node->left = new_BT_node(10);
+    root_node->right = new_BT_node(20);
+
+    root_node->left->left = new_BT_node(4);
+    root_node->left->right = new_BT_node(7);
+
+    root_node->right->left = new_BT_node(17);
+    root_node->right->right = new_BT_node(25);
+
+    // Stack *pre_stack = new_stack();
+    // Stack *in_stack = new_stack();
+    // Stack *post_stack = new_stack();
+
+    // walk_tree_pre_order(root_node, pre_stack);
+    // walk_tree_post_order(root_node, post_stack);
+    // walk_tree_in_order(root_node, in_stack);
+
+    // print_stack_v2(pre_stack);
+    // print_stack_v2(in_stack);
+    // print_stack_v2(post_stack);
+
+    bool search_result_true = BT_search(root_node, 4);
+    bool search_result_false = BT_search(root_node, 26);
+
+    printf("the value of true result is %d\n", search_result_true);
+    printf("the value of false result is %d\n", search_result_false);
+}
+```
+
+```
+> binary-tree.exe 
+the value of true result is 1
+the value of false result is 0
+```
+
