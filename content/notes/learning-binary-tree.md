@@ -400,18 +400,6 @@ int main(void) {
     root_node->right->left = new_BT_node(17);
     root_node->right->right = new_BT_node(25);
 
-    // Stack *pre_stack = new_stack();
-    // Stack *in_stack = new_stack();
-    // Stack *post_stack = new_stack();
-
-    // walk_tree_pre_order(root_node, pre_stack);
-    // walk_tree_post_order(root_node, post_stack);
-    // walk_tree_in_order(root_node, in_stack);
-
-    // print_stack_v2(pre_stack);
-    // print_stack_v2(in_stack);
-    // print_stack_v2(post_stack);
-
     bool search_result_true = BT_search(root_node, 4);
     bool search_result_false = BT_search(root_node, 26);
 
@@ -426,3 +414,28 @@ the value of true result is 1
 the value of false result is 0
 ```
 
+### Refinements
+
+```python
+class TreeNode:
+    def __init__(self, value, left=None, right=None):
+        self.value = value
+        self.left = left
+        self.right = right
+
+    def has_val(self, value):
+        if value == self.value:
+            return True
+
+        if self.left is None and self.right is None:
+            return False
+
+        if value > self.value:
+            return self.right.has_val(value)
+        else:
+            return self.left.has_val(value)
+
+    def __repr__(self):
+        return f"<TreeNode: {self.value}>"
+
+```
