@@ -419,6 +419,16 @@ the value of false result is 0
 ```python
 class TreeNode:
     def __init__(self, value, left=None, right=None):
+        if left and left.value > value:
+            raise ValueError(
+                f"left node value: '{left.value}' must be less than or equal to this node value: '{value}'"
+            )
+
+        if right and right.value < value:
+            raise ValueError(
+                f"right node value: '{right.value}' must be greater than this node value: '{value}'"
+            )
+
         self.value = value
         self.left = left
         self.right = right
@@ -427,13 +437,42 @@ class TreeNode:
         if value == self.value:
             return True
 
-        if self.left is None and self.right is None:
-            return False
-
         if value > self.value:
             return self.right.has_val(value)
         else:
             return self.left.has_val(value)
+
+        return False
+
+    def traverse_in_order(self, container=[]):
+        if self.left is None and self.right is None:
+            container.append(self.value)
+        else:
+            self.left.traverse_in_order(container=container)
+            container.append(self.value)
+            self.right.traverse_in_order(container=container)
+
+        return container
+
+    def traverse_pre_order(self, container=[]):
+        if self.left is None and self.right is None:
+            container.append(self.value)
+        else:
+            container.append(self.value)
+            self.left.traverse_in_order(container=container)
+            self.right.traverse_in_order(container=container)
+
+        return container
+
+    def traverse_post_order(self, container=[]):
+        if self.left is None and self.right is None:
+            container.append(self.value)
+        else:
+            self.left.traverse_in_order(container=container)
+            self.right.traverse_in_order(container=container)
+            container.append(self.value)
+
+        return container
 
     def __repr__(self):
         return f"<TreeNode: {self.value}>"
