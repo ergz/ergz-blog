@@ -9,7 +9,7 @@ So I always take tangents when learning something new. Right now I am focusing o
 and Algos Book, but I stumbled on a course for web audio synthesis using javascript. I've decided to do a couple of 
 classes tonight. I am on a lesson about creating a meter visualization. The basic project looks like this:
 
-![binary tree sketch](/notes/static/js-meter-viz.gif)
+<video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/videos/2023-09-16%2001-59-12.mp4" controls="controls" style="max-width: 730px;"></video>
 
 
 Kinda cool, but I want to make the outline of the circle be frequency of the signal and I think it would also be 
@@ -192,8 +192,31 @@ So at the top of the file we `let` a bunch of variables that are all set to `und
 
 The most important and where it all starts is with the `audioContext`
 
+From MDN:
+
 > The AudioContext interface represents an audio-processing graph built from audio modules linked together, each represented by an AudioNode. 
 An audio context controls both the creation of the nodes it contains and the execution of the audio processing, or decoding. 
 You need to create an AudioContext before you do anything else, as everything happens inside a context. It's recommended 
 to create one AudioContext and reuse it instead of initializing a new one each time, and it's OK to use a single AudioContext
 for several different audio sources and pipeline concurrently.
+
+Therefore we start by creating a new one with `audioContext = new AudioContext();`. Next we create an `<audio>` element on the DOM and make a reference
+to it with the variable `audio`. We set some initial properties to this element and start playing with `.play()`.
+Next we connect our `audioContext` to the audio element we created on the DOM and set up some variables to start extracting data from 
+this signal.
+
+These lines will create a new Analyser Node that we will use to extract frequency data from the audioContext.
+
+```javascript 
+analyserNode = audioContext.createAnalyser();
+analyserNode.smoothingTimeConstant = 1;
+signalData = new Float32Array(analyserNode.fftSize);
+```
+
+lastly we connect the `source`, which is the audio being streamed to 1) the destination (speakers/headphones) and 2) the analyser node
+that we want to use to extract data for visualizations.
+
+```javascript
+source.connect(audioContext.destination);
+source.connect(analyserNode);
+```
