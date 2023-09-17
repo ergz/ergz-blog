@@ -1,6 +1,9 @@
 ---
 title: A Meter Visualization in JS
 data: 2023-09-16
+tags:
+  - javascript
+  - web-audio
 ---
 
 ## Introduction
