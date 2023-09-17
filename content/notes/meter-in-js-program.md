@@ -285,5 +285,48 @@ We now get something like this
 
 Ok so I was unable to figure out the frequency outline for the circle but I put together something that looks pretty cool I think.
 
+Here is my final `draw()` method and corresponding visualizaion,
+
+```javascript 
+function draw() {
+  background("black");
+  const dim = min(height, width);
+
+  if (audioContext) {
+    analyserNode.getFloatTimeDomainData(signalData);
+
+    const signal = rmss(signalData);
+    const scale = 0.015;
+    const size = dim * scale * signal;
+
+    const redOffset = map(signal, 0, 0.5, -50, 200);
+    const blueOffset = map(signal, 0, 0.5, 255, -30);
+    const fillAlpha = map(signal, 0, 0.5, 0, 200);
+
+    stroke(Math.min(50 + redOffset, 256), 10, 0 + blueOffset);
+    fill(Math.min(50 + redOffset, 256), 10, 0 + blueOffset, fillAlpha);
+    strokeWeight(8);
+    // circle(width / 2, height / 2, size);
+
+    let numPoints = 200;
+    let radius = 100;
+    let glitchMagnitude = 150;
+    beginShape();
+    for (let i = 0; i <= numPoints; i++) {
+      let angle = (TWO_PI / numPoints) * i;
+      let r = radius + (size / 2) * glitchMagnitude + Math.random() * 8;
+      let x = width / 2 + r * cos(angle);
+      let y = height / 2 + r * sin(angle);
+
+      vertex(x, y);
+    }
+    endShape();
+  } else {
+    fill("white");
+    noStroke();
+    polygon(width / 2, height / 2, dim * 0.1, 3);
+  }
+}
+```
 
 <video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/videos/js-meter-with-fill.mp4" controls="controls" style="max-width: 730px;"></video>
