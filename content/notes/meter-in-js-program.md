@@ -220,3 +220,70 @@ that we want to use to extract data for visualizations.
 source.connect(audioContext.destination);
 source.connect(analyserNode);
 ```
+
+The flow audio data is shown here:
+
+```mermaid 
+flowchart LR
+    audioContext ==> destination 
+    audioContext ==> analyzerNode
+```
+
+<!-- ![fdsafdsa](https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/images/Learn%20JavaScript.png.png) -->
+
+### draw revisited
+
+At this point our `audioContext` is no longer undefined and so lets step through the `draw` function again.
+
+```javascript
+if (audioContext) {
+  analyserNode.getFloatTimeDomainData(signalData);
+
+  const signal = rmss(signalData);
+  const scale = 1;
+  const size = dim * scale * signal;
+
+  stroke("white");
+  noFill();
+  strokeWeight(dim * 0.0075);
+  circle(width / 2, height / 2, size);
+}
+```
+
+Since we have data in the audioContext, we want to start by pulling out the time domain data, or waveform into a `FloatArray32` object, in this
+case `signalData`. Next we pull out the root mean squared value from the signal and construct our circle using the width, height and 
+a scaled version of the signal.
+
+
+## Features to add
+
+Here are the features I want to add to this example
+
+1. Add Color
+2. Add frequency spectrum to the outline of the circle
+
+
+
+### Add Color
+
+I want the color to change with the meter, the place to start it looks like is the `strok("white")`, we need to make thi dynamic. I will
+use the p5 function map, it takes an incoming value and maps it to a new range, in this case we are taking the signal data, we tell it that it 
+ranges from 0 to 0.5 and we want to remap these values to -50 to 200 for red and 200 to -30 for blue. The rest is just adding these offsets
+to the `stroke` call.
+
+```javascript 
+const redOffset = map(signal, 0, 0.5, -50, 200);
+const blueOffset = map(signal, 0, 0.5, 255, -30);
+
+stroke(Math.min(50 + redOffset, 256), 10, 0 + blueOffset);
+```
+
+We now get something like this
+
+<video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/videos/js-meter-with-color.mp4" controls="controls" style="max-width: 730px;"></video>
+
+
+Ok so I was unable to figure out the frequency outline for the circle but I put together something that looks pretty cool I think.
+
+
+<video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/videos/js-meter-with-fill.mp4" controls="controls" style="max-width: 730px;"></video>
