@@ -333,3 +333,16 @@ function draw() {
 ```
 
 <video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/videos/js-meter-with-fill.mp4" controls="controls" style="max-width: 730px;"></video>
+
+
+## Other modifications
+
+Making modifications to this version of the code is very easy and I can experiment with different visuals easily, here are
+a few more version that I came up with.
+
+
+#### points instead of connected lines
+
+<video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/videos/js-meter-with-points.mp4" controls="controls" style="max-width: 730px;"></video>
+
+
