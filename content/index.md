@@ -12,6 +12,7 @@ On this site:
 - [Posts](/posts/): a collection of my posts;
 - [Notes](/notes/): a collection of my notes;
 - [Snippets](/snippets/): code examples and samples
+- [WIndows Tools](/wintools.md): good tools to have on Windows computer
 
 On other sites:
 - <a href="https://github.com/ergz?tab=repositories" target="_blank">Github</a>
