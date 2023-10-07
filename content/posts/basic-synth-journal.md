@@ -3,7 +3,26 @@ title: Basic Synth Journal
 ---
 
 I am on a mission to re-write Fabfilter's One Synth using web audio api, mostly just to learn javscript, audio synthesis and web audio programming. 
-In this post I will add updates to my progress. Newest updates on top.
+In this post I will add updates to my progress. Newest updates on top. Latest updates available at the <a href="https://git.emanuelrgz.com/ergz/simple-synth" target="_blank">Simple Synth repo</a>.
+
+## 10/6/2023
+
+New way to move betweem the octaves, much simpler to code, and more similar to what you would see in an analog synth. Here I demo the
+three voices with some detune to get that chorus effect. Next up is making the wave selector work for this rewrite and the keyboard
+work as well.
+
+<video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/simple-synth/simple-synth-2023-10-06-new-octave-selector.mp4" controls="controls" style="max-width: 730px;"></video>
+
+Next up:
+
+- [ ] Hook up waveform selection
+- [ ] Hook up keyboard
+- [ ] Add detune to all voices (and maybe an auto-spread knob??)
+- [ ] White Noise
+- [ ] Filters
+- [ ] Filter modulation
+
+The filters I think is where the most fun will be. 
 
 ## 10/5/2023
 
@@ -137,8 +156,8 @@ window.onload = function () {
 
   document.getElementById("activateVoice3").addEventListener("click", () => {
     console.log("voice 3 start clicked");
-    synth.audioContext.resume();
     synth.startOsc(osc3);
+    synth.audioContext.resume();
   });
 
   document
