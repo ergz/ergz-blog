@@ -7,10 +7,14 @@ In this post I will add updates to my progress. Newest updates on top. Latest up
 
 ## 10/7/2023
 
-Decided to work on the UI a little today, am using tailwind css, not really looking to all features of tailwind, I am just too 
+Decided to work on the UI a little today, am using tailwind css, not really looking to use all features of tailwind, I am just too 
 lazy to write my own css. This is what it looks like now. 
 
 ![Simple Synth UI Update](https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/simple-synth/simple-synth-ui-update-2023-10-08.png)
+
+Here is a little sketch what I eventually want the UI to have in the voices:
+
+![A vision](https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/simple-synth/Screenshot%202023-10-08%20at%203.22.39%E2%80%AFAM.png)
 
 
 ## 10/6/2023
