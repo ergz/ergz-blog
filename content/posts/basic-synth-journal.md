@@ -5,6 +5,14 @@ title: Basic Synth Journal
 I am on a mission to re-write Fabfilter's One Synth using web audio api, mostly just to learn javscript, audio synthesis and web audio programming. 
 In this post I will add updates to my progress. Newest updates on top. Latest updates available at the <a href="https://git.emanuelrgz.com/ergz/simple-synth" target="_blank">Simple Synth repo</a>.
 
+## 10/7/2023
+
+Decided to work on the UI a little today, am using tailwind css, not really looking to all features of tailwind, I am just too 
+lazy to write my own css. This is what it looks like now. 
+
+![Simple Synth UI Update](https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/simple-synth/simple-synth-ui-update-2023-10-08.png)
+
+
 ## 10/6/2023
 
 New way to move betweem the octaves, much simpler to code, and more similar to what you would see in an analog synth. Here I demo the
@@ -22,7 +30,8 @@ Next up:
 - [ ] Filters
 - [ ] Filter modulation
 
-The filters I think is where the most fun will be. 
+The filters I think is where the most fun will be. Eventually I will want to make it look pretty, maybe its worth tackling that 
+before I start writting more HTML this sorta basic way.
 
 ## 10/5/2023
 
