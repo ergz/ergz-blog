@@ -5,6 +5,14 @@ title: Basic Synth Journal
 I am on a mission to re-write Fabfilter's One Synth using web audio api, mostly just to learn javscript, audio synthesis and web audio programming. 
 In this post I will add updates to my progress. Newest updates on top. Latest updates available at the <a href="https://git.emanuelrgz.com/ergz/simple-synth" target="_blank">Simple Synth repo</a>.
 
+## 10/10/2023
+
+Decided to keep going with UI stuff and created an visualization for the oscillator, only implented on the first one for now, but here is 
+what it looks like now.
+
+<video src="https://emanuelrgz-content.sfo3.cdn.digitaloceanspaces.com/simple-synth/osc-viz-example.mp4" controls="controls" style="max-width: 730px;"></video>
+
+
 ## 10/7/2023
 
 Decided to work on the UI a little today, am using tailwind css, not really looking to use all features of tailwind, I am just too 
