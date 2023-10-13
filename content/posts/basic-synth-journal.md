@@ -5,6 +5,11 @@ title: Basic Synth Journal
 I am on a mission to re-write Fabfilter's One Synth using web audio api, mostly just to learn javscript, audio synthesis and web audio programming. 
 In this post I will add updates to my progress. Newest updates on top. Latest updates available at the <a href="https://git.emanuelrgz.com/ergz/simple-synth" target="_blank">Simple Synth repo</a>.
 
+## 10/12/2023
+
+Added detune to the rest of the voices and the visualization as well. Also deployed the site to github pages: <a href="https://ergz.github.io/simple-synth/" target="_blank">Simple Synth</a>
+
+
 ## 10/10/2023
 
 Decided to keep going with UI stuff and created an visualization for the oscillator, only implented on the first one for now, but here is 
