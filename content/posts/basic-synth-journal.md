@@ -5,6 +5,14 @@ title: Basic Synth Journal
 I am on a mission to re-write Fabfilter's One Synth using web audio api, mostly just to learn javscript, audio synthesis and web audio programming. 
 In this post I will add updates to my progress. Newest updates on top. Latest updates available at the <a href="https://git.emanuelrgz.com/ergz/simple-synth" target="_blank">Simple Synth repo</a>.
 
+## 10/13/2023
+
+Today I want to focus on getting the master volume and voice working together. At the moment they causing the signal to clip, so need to resolve this.
+THe problem is exactly what I through, namely the volumes wil add up to over 1 and causing the clip. Did not really come to a good solution for now, but
+I want to move on to work on some of the other features of the synth. For now I let the clipping happen but let the user know what I happening by showing 
+a red background to the viz.
+
+
 ## 10/12/2023
 
 Added detune to the rest of the voices and the visualization as well. Also deployed the site to github pages: <a href="https://ergz.github.io/simple-synth/" target="_blank">Simple Synth</a>
