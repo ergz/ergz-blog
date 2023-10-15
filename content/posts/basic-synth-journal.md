@@ -5,6 +5,11 @@ title: Basic Synth Journal
 I am on a mission to re-write Fabfilter's One Synth using web audio api, mostly just to learn javscript, audio synthesis and web audio programming. 
 In this post I will add updates to my progress. Newest updates on top. Latest updates available at the <a href="https://git.emanuelrgz.com/ergz/simple-synth" target="_blank">Simple Synth repo</a>.
 
+## 10/14/2023
+
+Made the app be dark, and added a filter, its ok for now. I will probably pause this projet for a bit, I may explore porting over this to a native
+app using imgui.
+
 ## 10/13/2023
 
 Today I want to focus on getting the master volume and voice working together. At the moment they causing the signal to clip, so need to resolve this.
